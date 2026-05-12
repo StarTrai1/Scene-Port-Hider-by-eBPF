@@ -18,6 +18,11 @@ com.omarea.vtools
 
 ## 更新内容
 
+### v2.0.1
+
+- 修复隐藏端口匹配过宽的问题。现在只按 socket API 使用的网络字节序写入目标端口，避免 `8788` 误伤字节翻转后的 `21538`、`8765` 误伤 `15650`。
+- 降低无关应用本地服务被误判为检测器的概率。
+
 ### v2.0
 
 - 改为纯 eBPF/cgroup socket hook 方案，不再写入 `iptables` / `ip6tables` 规则，也不再依赖 `service.d` 脚本。
@@ -108,9 +113,9 @@ adb devices
 然后执行：
 
 ```powershell
-adb shell su -c "cp /sys/kernel/btf/vmlinux /data/local/tmp/vmlinux.btf && chmod 0644 /data/local/tmp/vmlinux.btf"
-adb pull /data/local/tmp/vmlinux.btf vmlinux.btf
-adb shell su -c "rm -f /data/local/tmp/vmlinux.btf"
+adb shell su -c "cp /sys/kernel/btf/vmlinux /storage/emulated/0/Download/vmlinux.btf && chmod 0644 /storage/emulated/0/Download/vmlinux.btf"
+adb pull /storage/emulated/0/Download/vmlinux.btf vmlinux.btf
+adb shell su -c "rm -f /storage/emulated/0/Download/vmlinux.btf"
 ```
 
 注意：不要用下面这种方式导出：
